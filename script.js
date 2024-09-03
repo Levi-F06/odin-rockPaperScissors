@@ -26,6 +26,9 @@ function validateChoice(choice) {
 
 function playRound(humanChoice, computerChoice) {
   let result;
+  if (humanChoice === computerChoice) {
+    return;
+  }
   switch (humanChoice) {
     case "rock":
       result = computerChoice === "scissors" ? "win" : "loss";
@@ -44,12 +47,17 @@ function playGame() {
   const humanChoice = getHumanChoice();
   const computerChoice = getComputerChoice();
 
-  if (playRound(humanChoice, computerChoice) === "win") {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-    humanScore++;
-  } else {
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-    computerScore++;
+  switch (playRound(humanChoice, computerChoice)) {
+    case "win":
+      console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+      humanScore++;
+      break;
+    case "loss":
+      console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+      computerScore++;
+      break;
+    default:
+      console.log(`Draw! both you and the computer selected ${humanChoice}!`);
   }
   console.log(`Player score : ${humanScore}`);
   console.log(`Computer score : ${computerScore}`);
