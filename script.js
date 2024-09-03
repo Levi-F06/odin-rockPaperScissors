@@ -1,6 +1,9 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const startButton = document.querySelector("#startButton");
+const instructions = document.querySelector("#instructions");
+
 function getComputerChoice() {
   const options = ["rock", "paper", "scissors"];
   return options[Math.floor(Math.random() * 3)];
@@ -64,4 +67,8 @@ function playGame() {
   console.log("Press the button to play again!");
 }
 
-playGame();
+startButton.addEventListener("click", () => {
+  instructions.textContent = "Check the console...";
+  console.clear();
+  playGame();
+});
