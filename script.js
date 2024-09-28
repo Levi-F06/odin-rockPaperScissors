@@ -1,30 +1,12 @@
 let humanScore = 0;
 let computerScore = 0;
 
-const startButton = document.querySelector("#startButton");
-const instructions = document.querySelector("#instructions");
+const buttonsContainer = document.querySelector("#buttons");
+const buttons = buttonsContainer.children;
+const options = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
-  const options = ["rock", "paper", "scissors"];
   return options[Math.floor(Math.random() * 3)];
-}
-
-function getHumanChoice() {
-  let choice = prompt("rock, paper, or scissors?").toLowerCase();
-  while (!validateChoice(choice)) {
-    choice = prompt("Invalid choice! enter 'rock' 'paper' or 'scissors'");
-  }
-  return choice;
-}
-
-function validateChoice(choice) {
-  const options = ["rock", "paper", "scissors"];
-  for (let i = 0; i < options.length; i++) {
-    if (choice === options[i]) {
-      return true;
-    }
-  }
-  return false;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -46,8 +28,8 @@ function playRound(humanChoice, computerChoice) {
   return result;
 }
 
-function playGame() {
-  const humanChoice = getHumanChoice();
+function playGame(choice) {
+  const humanChoice = choice; 
   const computerChoice = getComputerChoice();
 
   switch (playRound(humanChoice, computerChoice)) {
@@ -67,8 +49,8 @@ function playGame() {
   console.log("Press the button to play again!");
 }
 
-startButton.addEventListener("click", () => {
-  instructions.textContent = "Check the console...";
-  console.clear();
-  playGame();
-});
+for (let i = 0; i < 3; i++) {
+  buttons[i].addEventListener("click", () => {
+    playGame(options[i]);
+  })
+}

@@ -1,16 +1,32 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./styles.css" />
-        <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="container">
-            <h1 id="instructions"></h1>
-            <button id="startButton">Click Me!</button>
-        </div>
-        <script src="./script.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Rock Paper Scissors!</h1>
+    </header>
+    <p>With a twist!</p>
+    <div class="imageCaption">
+      <img
+        src="./images/rules.png"
+        alt="Rock paper scissors rules unlucky if you can't see this'"
+      />
+      <p>The rules, each colour represents a chipmunk!</p>
+    </div>
+    <p id="gameState">Choose your fighter...</p>
+    <div id="buttons">
+      <img src="./images/chipmunk-alvin.jpeg" alt="alvin" />
+      <img src="./images/chipmink-simon.jpeg" alt="simon" />
+      <img src="./images/chipmunk-theodore.jpeg" alt="theodore" />
+    </div>
+    <div id="result">
+
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>
