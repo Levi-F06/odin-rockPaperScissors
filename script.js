@@ -76,6 +76,10 @@ function playGame(choice, playerSrc) {
   playerScoreP.textContent = `Player: ${humanScore}`;
   cpuScoreP.textContent = `CPU: ${computerScore}`;
 
+  if (humanScore === 5 || computerScore === 5) {
+    return showEndScreen(humanScore > computerScore);
+  }
+
   playAgainButton = document.createElement("button");
   playAgainButton.textContent = "play again!";
   playAgainButton.addEventListener("click", () => {
@@ -85,6 +89,23 @@ function playGame(choice, playerSrc) {
   });
 
   resultBox.appendChild(playAgainButton);
+}
+
+function showEndScreen(win) {
+  const overlay = document.querySelector("#overlay");
+  overlay.classList.remove("hide");
+  overlay.classList.add("show");
+  if (win) {
+    overlay.children[0].textContent = "YOU WIN!";
+    overlay.style.backgroundColor = "green";
+  } else {
+    overlay.children[0].textContent = "YOU LOSE!";
+    overlay.style.backgroundColor = "red";
+  }
+
+  overlay.children[1].addEventListener("click", () => {
+    window.location.reload();
+  });
 }
 
 for (let i = 0; i < 3; i++) {
