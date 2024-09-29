@@ -3,10 +3,17 @@ let computerScore = 0;
 
 const buttonsContainer = document.querySelector("#buttons");
 const buttons = buttonsContainer.children;
-const options = ["rock", "paper", "scissors"];
 
-function getComputerChoice() {
-  return options[Math.floor(Math.random() * 3)];
+const options = ["rock", "paper", "scissors"];
+const resultBox = document.querySelector("#result");
+const gameState = document.querySelector("#gameState");
+
+const playerScoreP = document.querySelector("#playerScore");
+const cpuScoreP = document.querySelector("#cpuScore");
+
+function getRandomNumber() {
+  const randomNumber = Math.floor(Math.random() * 3);
+  return randomNumber;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -28,29 +35,56 @@ function playRound(humanChoice, computerChoice) {
   return result;
 }
 
-function playGame(choice) {
-  const humanChoice = choice; 
-  const computerChoice = getComputerChoice();
+function playGame(choice, playerSrc) {
+  buttonsContainer.classList.toggle("hide");
+
+  const randomNumber = getRandomNumber();
+
+  const humanChoice = choice;
+  const computerChoice = options[randomNumber];
+
+  const playerChar = document.createElement("img");
+  const cpuChar = document.createElement("img");
+
+  const para = document.createElement("p");
+  para.textContent = "vs";
+
+  playerChar.src = playerSrc;
+  cpuChar.src = buttons[randomNumber].src;
+
+  resultBox.appendChild(playerChar);
+  resultBox.appendChild(para);
+  resultBox.appendChild(cpuChar);
 
   switch (playRound(humanChoice, computerChoice)) {
     case "win":
-      console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+      gameState.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
       humanScore++;
       break;
     case "loss":
-      console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+      gameState.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
       computerScore++;
       break;
     default:
-      console.log(`Draw! both you and the computer selected ${humanChoice}!`);
+      gameState.textContent = `Draw! both you and the computer selected ${humanChoice}!`;
   }
-  console.log(`Player score : ${humanScore}`);
-  console.log(`Computer score : ${computerScore}`);
-  console.log("Press the button to play again!");
+
+  playerScoreP.textContent = `Player: ${humanScore}`;
+  cpuScoreP.textContent = `CPU: ${computerScore}`;
+
+  playAgainButton = document.createElement("button");
+  playAgainButton.textContent = "play again!";
+  playAgainButton.addEventListener("click", () => {
+    gameState.textContent = "Choose your fighter...";
+    buttonsContainer.classList.toggle("hide");
+    resultBox.innerHTML = "";
+  });
+
+  resultBox.appendChild(playAgainButton);
 }
 
 for (let i = 0; i < 3; i++) {
   buttons[i].addEventListener("click", () => {
-    playGame(options[i]);
-  })
+    playGame(options[i], buttons[i].src);
+  });
 }
