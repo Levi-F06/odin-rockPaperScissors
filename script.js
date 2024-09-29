@@ -49,12 +49,16 @@ function playGame(choice, playerSrc) {
   const para = document.createElement("p");
   para.textContent = "vs";
 
+  // used only as a container to make styling easier
+  const matchup = document.createElement("div");
+
   playerChar.src = playerSrc;
   cpuChar.src = buttons[randomNumber].src;
 
-  resultBox.appendChild(playerChar);
-  resultBox.appendChild(para);
-  resultBox.appendChild(cpuChar);
+  matchup.appendChild(playerChar);
+  matchup.appendChild(para);
+  matchup.appendChild(cpuChar);
+  resultBox.appendChild(matchup);
 
   switch (playRound(humanChoice, computerChoice)) {
     case "win":
